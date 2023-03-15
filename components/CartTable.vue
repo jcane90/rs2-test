@@ -71,14 +71,14 @@ const getBasketDetails = async () => {
     //basketDetails.value = basket
 
     const products = basket.reduce((acc, curr) => {
-    const product = curr.products;
-    if (acc[product.id]) {
-      acc[product.id].count++;
-    } else {
-      acc[product.id] = { ...product, count: 1 };
-    }
-    return acc;
-  }, {});
+      const product = curr.products;
+      if (acc[product.id]) {
+        acc[product.id].count++;
+      } else {
+        acc[product.id] = { ...product, count: 1 };
+      }
+      return acc;
+    }, {});
 
   const result = Object.values(products);
   console.log(result)
