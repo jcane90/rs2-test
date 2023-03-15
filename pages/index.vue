@@ -42,11 +42,13 @@
               <th scope="col" class="px-6 py-3">
                   Description
               </th>
-              <th></th>
+              <th>
+                Quantity / Action
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="product in allProducts" :key="product.uuid" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <tr v-for="(product, index) in allProducts" :key="product.uuid" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {{ product.name }}
               </th>
@@ -57,8 +59,8 @@
                   {{ product.description }}
               </td>
               <td class="px-6 py-4" style="max-width: 120px">
-                <input v-model="quantity" class="relative cursor-default mr-2 rounded-md bg-white py-1.5 px-3 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6" type="number" min="1" max="5">
-                <button @click="filterProducts(filterName, filterType)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
+                <input v-model="quantity[index]" class="relative cursor-default mr-2 rounded-md bg-white py-1.5 px-3 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6" type="number" min="1" max="5">
+                <button @click="addToBasket(product.id, quantity[index], user.id)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
               </td>
             </tr>
           </tbody>
@@ -68,6 +70,11 @@
         </div>
       </div>
 
+      <div class="pt-8 pb-28 border-t border-slate-200 text-slate-500 dark:border-slate-200/5 mt-12">
+        <h1 class="text-2xl my-4">Your Basket</h1>
+        <cart-table />
+      </div>
+
     </div>
   </main>
 </template>
@@ -75,13 +82,15 @@
 <script setup>
 import { ref } from 'vue'
 const supabase = useSupabaseClient()
+const user = useSupabaseUser()
 const router = useRouter()
 const allProducts = ref()
 const filterName = ref('')
 const filterType = ref('all')
 const isLoading = ref(false)
 const countProducts = ref(0)
-const quantity = ref(0)
+const quantity = ref([])
+const cart = ref([])
 
 definePageMeta({
   middleware: 'auth'
@@ -142,6 +151,22 @@ const filterProducts = async (filterName, filterType) => {
   } catch (error) {
     console.log(error)
     isLoading.value = false
+  }
+}
+
+const addToBasket = async (productId, quantity, userId) => {
+  try {
+    for (let i = 0; i < quantity; i++) {
+      const { data, error } = await supabase
+      .from('basket')
+      .insert([
+        { ProductID: productId, UserID: userId },
+      ])
+      debugger
+      console.log(quantity)
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 </script>
