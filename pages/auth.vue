@@ -35,7 +35,6 @@
 import { ref, onUpdated } from 'vue';
 const router = useRouter()
 const supabase = useSupabaseClient()
-const user = useSupabaseUser()
 
 const  username = ref('')
 const password = ref('')
@@ -44,13 +43,13 @@ const isLoading = ref(false)
 const invalidUser = ref(false)
 
 definePageMeta({
-  middleware: 'not-auth'
+  middleware: 'notauth'
 })
 
 
 const login = async () => {
   try {
-    console.log(router)
+    //console.log(router)
     isLoading.value = true
     const { data, error } = await supabase.auth.signInWithPassword({ 
       email: username.value,
@@ -63,7 +62,6 @@ const login = async () => {
       invalidUser.value = true
     }
     isLoading.value = false
-    console.log(data)
   } catch (error) {
     isLoading.value = false
     invalidUser.value = true

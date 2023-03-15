@@ -42,6 +42,7 @@
               <th scope="col" class="px-6 py-3">
                   Description
               </th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -54,6 +55,10 @@
               </td>
               <td class="px-6 py-4" style="max-width: 250px">
                   {{ product.description }}
+              </td>
+              <td class="px-6 py-4" style="max-width: 120px">
+                <input v-model="quantity" class="relative cursor-default mr-2 rounded-md bg-white py-1.5 px-3 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6" type="number" min="1" max="5">
+                <button @click="filterProducts(filterName, filterType)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
               </td>
             </tr>
           </tbody>
@@ -76,6 +81,7 @@ const filterName = ref('')
 const filterType = ref('all')
 const isLoading = ref(false)
 const countProducts = ref(0)
+const quantity = ref(0)
 
 definePageMeta({
   middleware: 'auth'
