@@ -72,8 +72,10 @@
 
       <div class="pt-8 pb-28 border-t border-slate-200 text-slate-500 dark:border-slate-200/5 mt-12">
         <h1 class="text-2xl my-4">Your Basket</h1>
-        <cart-table v-if="!isLoading" />
-        <Loading v-else />
+        <div class="overflow-x-auto">
+          <cart-table v-if="!isLoading" />
+          <Loading v-else />
+        </div>
       </div>
 
     </div>
