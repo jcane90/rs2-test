@@ -15,7 +15,7 @@ import { ref } from 'vue'
 const supabase = useSupabaseClient()
 
 definePageMeta({
-  middleware: 'auth'
+  middleware: process.client ? 'auth' : undefined
 })
 
 const signOut = async () => {

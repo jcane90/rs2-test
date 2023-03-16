@@ -93,7 +93,8 @@ const countProducts = ref(0)
 const quantity = ref([])
 
 definePageMeta({
-  middleware: 'auth'
+  //middleware: 'auth'
+  middleware: process.client ? 'auth' : undefined
 })
 
 const signOut = async () => {

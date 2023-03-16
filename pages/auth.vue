@@ -43,7 +43,7 @@ const isLoading = ref(false)
 const invalidUser = ref(false)
 
 definePageMeta({
-  middleware: 'notauth'
+  middleware: process.client ? 'notauth' : undefined
 })
 
 
