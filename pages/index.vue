@@ -171,5 +171,6 @@ const addToBasket = async (productId, quantity, userId) => {
     console.log(error)
     isLoading.value = false
   }
+  isLoading.value = false
 }
 </script>
