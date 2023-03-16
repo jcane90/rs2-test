@@ -72,7 +72,7 @@
 
       <div class="pt-8 pb-28 border-t border-slate-200 text-slate-500 dark:border-slate-200/5 mt-12">
         <h1 class="text-2xl my-4">Your Basket</h1>
-        <cart-table />
+        <cart-table ref="basketRef" />
       </div>
 
     </div>
@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onUpdated } from 'vue'
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const router = useRouter()
@@ -90,7 +90,7 @@ const filterType = ref('all')
 const isLoading = ref(false)
 const countProducts = ref(0)
 const quantity = ref([])
-const cart = ref([])
+//const cartTable = ref()
 
 definePageMeta({
   middleware: 'auth'
@@ -160,10 +160,10 @@ const addToBasket = async (productId, quantity, userId) => {
       const { data, error } = await supabase
       .from('basket')
       .insert([
-        { ProductID: productId, UserID: userId },
+        { product_id: productId, user_id: userId },
       ])
-      debugger
       console.log(quantity)
+      //cartTable.basketRef.getBasketDetails()
     }
   } catch (error) {
     console.log(error)
