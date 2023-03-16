@@ -47,14 +47,6 @@ onMounted(async () => {
   await getBasketDetails()
 })
 
-// defineExpose( ()=> {
-//   getBasketDetails
-// })
-
-onUpdated( async () => {
-  //await getBasketDetails()
-})
-
 const getBasketDetails = async () => {
   try {
     let { data: basket, error } = await supabase
@@ -90,11 +82,9 @@ const getBasketDetails = async () => {
 }
 
 const deleteItem = async (productId, userId) => {
-  debugger
   const conf = confirm('Do you want to remove this from your basket?')
 
   if(conf) {
-    debugger
     try {
       const { data, error } = await supabase
       .from('basket')

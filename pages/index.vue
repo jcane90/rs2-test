@@ -72,7 +72,8 @@
 
       <div class="pt-8 pb-28 border-t border-slate-200 text-slate-500 dark:border-slate-200/5 mt-12">
         <h1 class="text-2xl my-4">Your Basket</h1>
-        <cart-table ref="basketRef" />
+        <cart-table v-if="!isLoading" />
+        <Loading v-else />
       </div>
 
     </div>
@@ -90,7 +91,6 @@ const filterType = ref('all')
 const isLoading = ref(false)
 const countProducts = ref(0)
 const quantity = ref([])
-//const cartTable = ref()
 
 definePageMeta({
   middleware: 'auth'
@@ -155,6 +155,7 @@ const filterProducts = async (filterName, filterType) => {
 }
 
 const addToBasket = async (productId, quantity, userId) => {
+  isLoading.value = true
   try {
     for (let i = 0; i < quantity; i++) {
       const { data, error } = await supabase
@@ -163,10 +164,11 @@ const addToBasket = async (productId, quantity, userId) => {
         { product_id: productId, user_id: userId },
       ])
       console.log(quantity)
-      //cartTable.basketRef.getBasketDetails()
+      isLoading.value = false
     }
   } catch (error) {
     console.log(error)
+    isLoading.value = false
   }
 }
 </script>
