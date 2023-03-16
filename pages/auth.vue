@@ -57,7 +57,8 @@ const login = async () => {
     })
     invalidUser.value = !data.user ? true : false
     if(data.user) {
-      router.push({ path: "/" });
+      //router.push({ path: "/" });
+      router.go()
     }else {
       invalidUser.value = true
     }
