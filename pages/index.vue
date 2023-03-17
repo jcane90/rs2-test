@@ -1,6 +1,6 @@
 <template>
   <Navbar @signout="signOut"/>
-  <main>
+  <main class="mt-16">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="lg:grid lg:grid-cols-6 gap-4">
         <div class="grid col-span-4">
