@@ -21,6 +21,8 @@ pnpm install
 
 Start the development server on http://localhost:3000
 
+Live Demo: https://rs2test.netlify.app/
+
 ```bash
 npm run dev
 ```
