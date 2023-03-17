@@ -157,8 +157,30 @@ const filterProducts = async (filterName, filterType) => {
   }
 }
 
+const ifItemExistInBasket = async (productId, userId) => {
+  try {
+    let { data: basket, error } = await supabase
+    .from('basket')
+    .select("*")
+    .eq('product_id', productId)
+    .eq('user_id', userId)
+    //console.log(basket)
+    if(basket.length > 0) {
+      return true
+    }
+    return false
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const addToBasket = async (productId, quantity, userId) => {
   isLoading.value = true
+  if (await ifItemExistInBasket(productId, userId)) {
+    alert('This product is already in your basket')
+    isLoading.value = false
+    return
+  }
   try {
     for (let i = 0; i < quantity; i++) {
       const { data, error } = await supabase
