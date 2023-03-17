@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# RS2 Test
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Run the project
 
 ## Setup
 
