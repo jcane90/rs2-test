@@ -30,9 +30,9 @@
             </div>
           </div>
           
-          <div class="relative overflow-x-auto">
+          <div class="relative overflow-x-auto--">
             <Loading v-if="isLoading" />
-            <table v-if="countProducts > 0" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <table v-if="countProducts > 0" class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" class="px-6 py-3">
@@ -75,7 +75,7 @@
         <div class="grid col-span-2">
           <div class="pb-28 border-slate-200 dark:border-slate-200/5">
             <h1 class="text-2xl my-4">Your Basket</h1>
-            <div class="overflow-x-auto">
+            <div class="table-auto md:overflow-x-hidden">
               <cart-table v-if="!isLoading" />
               <Loading v-else />
             </div>
