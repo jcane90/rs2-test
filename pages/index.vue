@@ -80,6 +80,7 @@
 
     </div>
   </main>
+  <Alert v-if="alertContent" @close-alert="close">{{ alertContent }}</Alert>
 </template>
 
 <script setup>
@@ -93,6 +94,7 @@ const filterType = ref('all')
 const isLoading = ref(false)
 const countProducts = ref(0)
 const quantity = ref([])
+const alertContent = ref(null)
 
 definePageMeta({
   //middleware: 'auth'
@@ -175,9 +177,11 @@ const ifItemExistInBasket = async (productId, userId) => {
 }
 
 const addToBasket = async (productId, quantity, userId) => {
+  alertContent.value = null
+  if (!quantity) return
   isLoading.value = true
   if (await ifItemExistInBasket(productId, userId)) {
-    alert('This product is already in your basket')
+    alertContent.value = 'This product is already in your basket'
     isLoading.value = false
     return
   }
@@ -196,5 +200,9 @@ const addToBasket = async (productId, quantity, userId) => {
     isLoading.value = false
   }
   isLoading.value = false
+}
+
+const close = () => {
+  alertContent.value = null
 }
 </script>
