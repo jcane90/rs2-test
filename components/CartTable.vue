@@ -5,12 +5,6 @@
         <th scope="col" class="px-6 py-3">
             Product name
         </th>
-        <!-- <th scope="col" class="px-6 py-3">
-            Type
-        </th>
-        <th scope="col" class="px-6 py-3">
-            Description
-        </th> -->
         <th>
           Quantity / Action
         </th>
@@ -21,12 +15,6 @@
         <th :title="basket.description" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             <span>{{ basket.name }} ({{ basket.type }})</span>
         </th>
-        <!-- <td class="px-6 py-4">
-            {{ basket.type }}
-        </td>
-        <td class="px-6 py-4" style="max-width: 250px">
-            {{ basket.description }}
-        </td> -->
         <td class="px-6 py-4 whitespace-nowrap" style="max-width: 120px">
           {{ basket.count }}
           <button @click="deleteItem(basket.id, user.id)" type="button" class="ml-3 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Remove</button>
